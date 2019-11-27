@@ -70,6 +70,22 @@ switch(language){
 	console.log("Hello world");
 };
 
+/*U slucaju, da je cilj da se samo u console napise hello world na 5 jezika onda vazi sledece*/
+
+
+
+var a="Hello_world";
+
+switch(a){
+
+case "Hello_world" :
+console.log("Ciao mondo");
+console.log("Hallo welt");
+console.log("Bonjour le monde");
+console.log("Hola mundo");
+console.log("Zdravo svete");
+}
+
 
 /*TASK 4*/
 
