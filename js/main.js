@@ -1,131 +1,121 @@
-
-
 /*TASK 1*/
 
-var dataOld=[34, true, "Peter", 1992];
+var personOne = {
+    name: "Mike",
+    age: 28,
+    married: true
+}
 
-var dataNew=[];
 
-for(var i=0;i<dataOld.length;i++) {
-	dataNew[i]=dataOld[i]
+var change = function(){
+    personOne.age=34,
+    delete personOne.married;
 };
 
-console.log(dataNew);
+change();
+
+console.log(personOne);
 
 
 /*TASK 2*/
 
-var dataOld = [34, true, "Peter", 1992];
-
-var dataNew = [];
-
-for(var i=0;i<dataOld.length;i++){
-	dataNew[i]=dataOld[dataOld.length-1-i]
+var personTwo = {
+    name: "Jack",
+    age: 32,
+    married: true
 };
 
-console.log(dataNew);
+var kids = function(){
+    if(personTwo.children===undefined){
+        personTwo.children=[{name:"Ana", age:5,gender:"girl"},{name:"Tamara", age:8, gender:"girl"}]
+        
+    }console.log(personTwo)
+}
+
+kids();
 
 
 /*TASK 3*/
 
-var dataOld = [34, true, "Peter", 1992];
-
-var dataNew = [12, "Jack"];
-
-for(var i=2;i<dataOld.length+2;i++){
-	dataNew[i]=dataOld[i-2]
-};
-
-console.log(dataNew);
-
+var students = [ 
+   {
+       name: 'Mike',
+       age: 28,
+       passed: false
+   },
+   {
+       name: 'Anna',
+       age: 23,
+       passed: true
+   },
+   {
+       name: 'Jack',
+       age: 32,
+       passed: true
+   },
+];
+var exam=function(){
+for(var i=0;i<students.length;i++){
+    if(students[i].passed===false){
+        console.log(students[i].name+" didnt pass the exam")
+    }else if(students[i].passed===true){
+        console.log(students[i].name+" passed the exam")
+    }
+}};
+exam();
 
 /*TASK 4*/
 
-var a = [12, 56, 32, 44, 69];
+var students = [ 
+   {
+       name: 'Mike',
+       age: 28,
+       passed: false
+   },
+   {
+       name: 'Anna',
+       age: 23,
+       passed: true
+   },
+   {
+       name: 'Jack',
+       age: 32,
+       passed: true
+   },
+];
 
-var b = [88, 7, 13];
+var names=[];
+var ages=[];
+var passed=[];
 
-var c =[];
-
-/*Originalno sam uradio ovako, obzirom da smo pominjali push komandu 
-
-for(i=0;i<a.length;i++) {c.push(a[i])};
-
-for(i=0;i<b.length;i++) {c.push(b[i])};
-
-console.log(c);*/
-
-for(var i=0;i<a.length;i++){
-	c[i]=a[i]
-};
-
-for(var i=0;i<b.length;i++){
-	c[i+a.length]=b[i]
-};
-
-console.log(c);
+var sort = function(){
+    for(i=0;i<students.length;i++){
+      names[i]=students[i].name; 
+      ages[i]=students[i].age;     
+      passed[i]=students[i].passed;   
+    }console.log(names);
+      console.log(ages);
+      console.log(passed);
+}
 
 
 
-
+sort();
 
 /*TASK 5*/
 
-var a = [12, 56, 32, 44];
 
-var b = [88, 7, 13];
+var person = {
+    name: "Jack",
+    age: 32,
+    married: true
+}
 
-var c = [];
+var newObject={};
 
-
-for(var i=0;i<a.length;i++){
-	c[i*2]=a[i]
-};
-
-for(var i=0;i<b.length;i++){
-	c[2*i+1]=b[i]
-};
+newObject.name=person.name;
+newObject.age=person.age;
+newObject.married=person.married;
 
 
-	console.log(c);
-
-
-/*TASK 6*/
-
-var x=("");
-
-for(var i=0;i<6;i++)
-{
-	x=x+("*");
-	console.log(x);
-};
-
-/*A moze i ovako*/
-/*for(var i=0;i<=5;i++)
-{
-	for(var j=0; j<=i;j++)
-	{
-		x=x+("*");
-	}
-	console.log(x);
-	x=("");
-		
-};*/
-
-
-/*TASK 7*/
-
-var x=("");
-
-for(var i=0;i<=5;i++)
-{
-	for(var j=0;j<=9;j++)
-	{
-		if(i===0||i===5||j===0||j===9)
-		{	x=x+("*");
-		}else{
-			x=x+(" ");
-			}
-	}console.log(x);
-		x=("");
-};
+console.log(newObject.age);
