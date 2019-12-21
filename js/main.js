@@ -101,21 +101,3 @@ var sort = function(){
 
 
 sort();
-
-/*TASK 5*/
-
-
-var person = {
-    name: "Jack",
-    age: 32,
-    married: true
-}
-
-var newObject={};
-
-newObject.name=person.name;
-newObject.age=person.age;
-newObject.married=person.married;
-
-
-console.log(newObject.age);
