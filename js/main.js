@@ -59,15 +59,21 @@ console.log(dusan,nemanja,dennis,zivojin,branko,aleksandar,milan,mihailo,lisandr
 
 //TASK 4
 
-function Calculation(firstNumber,secondNumber,method){
+function Calculate(firstNumber,secondNumber,score){
   this.firstNumber=firstNumber;
   this.secondNumber=secondNumber;
-  this.method=method;
+  this.score=score;
 }
 
-var a=new Calculation(2,4,2*4);
-var b=new Calculation(3,6,3+6);
-var c=new Calculation(5,1,5/1);
-var d=new Calculation(9,7,9-7);
+function adding(firstNumber,secondNumber){score=firstNumber+secondNumber; return score}
+function multyplying(firstNumber,secondNumber){score=firstNumber*secondNumber;return score}
+function deduction(firstNumber,secondNumber){score=firstNumber-secondNumber; return score}
+function division(firstNumber,secondNumber){score=firstNumber/secondNumber; return score}
+
+
+var a=new Calculate(2,8,adding(2,8));
+var b=new Calculate(3,6,multyplying(3,6));
+var c=new Calculate(7,5,deduction(7,5));
+var d=new Calculate(4,1,division(4,1));
 
 console.log(a,b,c,d);
