@@ -1,79 +1,92 @@
-//TASK 1
-
-function Student(name,lastName,age,averageGrade){
-  this.name=name;
-  this.lastName=lastName;
-  this.age=age;
-  this.averageGrade=averageGrade;
-}
+/*TASK 1*/
 
 
-var jack=new Student("Jack","Black",22,8.35);
-var jane=new Student("Jane","Bell",21,9.02);
-var molly=new Student("Molly","Jackson",19,8.20);
+var text="Lorem ipsum dolor sit amet";
 
-console.log(jack,jane,molly);
+console.log(text.toLowerCase());
 
-//TASK 2
-
-function RedStar(name,lastName,goalsScored,yellowCards){
-  this.name=name;
-  this.lastName=lastName;
-  this.goalsScored=goalsScored;
-  this.yellowCards=yellowCards;
-}
-
-var vlahovic=new RedStar("Dusan","Vlahovic",41,4);
-var radonjic=new RedStar("Nemanja","Radonjic",9,3);
-var mann=new RedStar("Dennis","Mann",11,4);
-var pejcinovic=new RedStar("Zivojin","Pejcinovic",18,6);
-var jovicic=new RedStar("Branko","Jovicic",14,12);
-var djordjevic=new RedStar("Aleksandar","Djordjevic",7,13);
-var gajic=new RedStar("Milan","Gajic",4,7);
-var ristic=new RedStar("Mihailo","Ristic",11,8);
-var martinez=new RedStar("Lisandro","Martinez",12,10);
-var markovic=new RedStar("Svetozar","Markovic",5,9);
-var rajkovic=new RedStar("Predrag","Rajkovic",0,0);
-
-console.log(vlahovic,radonjic,mann,pejcinovic,jovicic,djordjevic,gajic,ristic,martinez,markovic,rajkovic);
+/*TASK 2*/
 
 
-//TASK 3
+if(text.includes("sit")){console.log("word sit exists")}
+  else{console.log("word sit doesnt exist")};
 
-var redStarPlayers=[["Dusan","Vlahovic",41,4],["Nemanja","Radonjic",9,3],["Dennis","Mann",11,4],["Zivojin","Pejcinovic",18,6],["Branko","Jovicic",14,12],["Aleksandar","Djordjevic",7,13],["Milan","Gajic",4,7],["Mihailo","Ristic",11,8],["Lisandro","Martinez",12,10],["Svetozar","Markovic",5,9],["Predrag","Rajkovic",0,0]];
+/*TASK 3*/
 
-function CrvenaZvezda(player){
-  this.name=player[0];
-  this.lastName=player[1];
-  this.goalsScored=player[2];
-  this.yellowCards=player[3];
-}
+console.log(text.length-1)
 
-for(var i=0;i<redStarPlayers.length;i++){
-  this[redStarPlayers[i][0].toLowerCase()]=new CrvenaZvezda(redStarPlayers[i])
-};
+/*TASK 4*/
 
+console.log(text.split(" ",3))
 
-console.log(dusan,nemanja,dennis,zivojin,branko,aleksandar,milan,mihailo,lisandro,svetozar,predrag);
+/*TASK 5*/
 
+var txt="Piter is an actor.";
 
-//TASK 4
+console.log(txt.replace("e","o"))
 
-function Calculate(firstNumber,secondNumber,score){
-  this.firstNumber=firstNumber;
-  this.secondNumber=secondNumber;
-  this.score=score;
-}
+/*TASK 6*/
 
-function adding(firstNumber,secondNumber){score=firstNumber+secondNumber; return score}
-function multyplying(firstNumber,secondNumber){score=firstNumber*secondNumber;return score}
-function deduction(firstNumber,secondNumber){score=firstNumber-secondNumber; return score}
-function division(firstNumber,secondNumber){score=firstNumber/secondNumber; return score}
+var someData = [34, 23, 14, 56, 23, 44, 65];
+
+someData.splice(3,1);
+
+console.log(someData);
+
+/*TASK 7*/
+
+var someData = [34, 23, 14, 56, 23, 44, 65];
 
 
-var a=new Calculate(2,8,adding(2,8));
-var b=new Calculate(3,6,multyplying(3,6));
-var c=new Calculate(7,5,deduction(7,5));
-var d=new Calculate(4,1,division(4,1));
 
-console.log(a,b,c,d);
+var otherData=(someData.splice(1,3).concat(someData.splice(1,3).reverse()))
+
+console.log(otherData);
+
+
+/*TASK 8*/
+
+var someData = [334, 233, 212, 199, 154, 122];
+
+var otherData=[];
+
+someData.forEach(function(element){
+  otherData[otherData.length]=someData[otherData.length]-someData[otherData.length-1]
+});
+
+
+console.log(otherData);
+
+/*TASK 9*/
+
+var students = [
+  {
+     name: "Jim",
+     avgGrade: 8.5556
+  },
+  {
+     name: "Mike",
+     avgGrade: 8.5492
+  },
+  {
+     name: "Anna",
+     avgGrade: 8.9322
+  },
+  {
+     name: "Jack",
+     avgGrade: 8.6111
+  }
+]
+
+
+var goodStudents=students.filter(function(students){
+    return students.avgGrade>8.5
+  }
+)
+
+goodStudents.forEach(function(goodStudents){
+  goodStudents.avgGrade=goodStudents.avgGrade.toFixed(2)
+});
+
+
+console.log(goodStudents);
