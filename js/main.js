@@ -1,165 +1,80 @@
-//FIRST PART
+//Callback functions
 
-/*TASK 1*/
+//Task 5
+var arr=[];
+var num;
+var arrNew=[];
 
-var data=[];
-var printData=function(data){
-  for(var i=0;i<3;i++){
-    for(var j=0;j<3;j++){
-    var k=3*i+j+1;  
-    console.log("At position "+data[i],",subposition "+data[j],",value is "+k)
-   } }
-
-};
-
-
-
-
-printData([0,1,2]);
-
-
-
-//TASK 2
-
-Object.prototype.zz=function(){
-  for(var i=0;i<this.length;i++){
- console.log(this[i].name,this[i].age)
-}}
-
-var data = [{name:"Jim",age:45},{name:"Peter",age:29},{name:"Emanuela",age:25}];
-
-data.zz();
-
-
-//SECOND PART
-
-//TASK 1
-
-var someData = {
-  name: "Peter",
-  lastName: "Dinklage",
-  status: "married"
-};
-
-var newData={};
-
-function changeKey(someData){
-  newData["Peter"]=someData["name"];
-  newData["Dinklage"]=someData["lastName"];
-  newData["married"]=someData["status"];
-};
-
-changeKey(someData);
-console.log(newData);
-
-//TASK 2
-
-var someData = [13, 45, 56, [32, 11], 27, [55, 92]];
-
-var otherData=[];
-
-otherData=someData.toString().split(",");
-
-for(var i=0;i<otherData.length;i++){
-  otherData[i]=parseInt(otherData[i])
-}
-console.log(otherData);
-
-//TASK 3
-
-var someData = [13, 45, 56, [32, 11], 27, [55, 92]];
-var xyzData=[];
-
-
-var joinArr=function(someData){
-  xyzData = someData.toString().split(",");
-  for(var i=0;i<xyzData.length;i++){
-    xyzData[i]=parseInt(xyzData[i]);
-  }
-}  
-
-
-function subArr(array,calculationFunction){
-   someData=someData.splice(3,1).concat(someData.splice(4,1));
-   calculationFunction(someData);
-   return xyzData;
-};
-
-var boom=subArr(someData,joinArr);
-console.log(boom);
-
-
-//TASK 4
-
-
-var someData = {
-  name: "Peter",
-  lastName: "Dinklage",
-  status: "married"
-};
-
-function nameChecker(){
-  if(someData.hasOwnProperty("name")){
-    return function (){
-  
-  delete someData["name"]}
-  
-}
-
-  else 
-  
-      return function(d){
-        someData.name=d;
-      }
-    }
-  ;
-
-
-nameChecker(someData)();
-console.log(someData);
-
-
-//TASK 5
-
-var someData = {
-  name: "Peter",
-  lastName: "Dinklage",
-  status: "married"
-};
-
-someData.nameChecker=function(){
-  if(someData.hasOwnProperty("name")){
-    someData.removeName=function(){
-      delete someData["name"];
-      console.log(someData);
-      someData.addName=function(){
-        someData.name="Mike";
-        console.log(someData);
-      }
-      someData.addName();
-    }
-    someData.removeName();
+var compare=function(arr,num){
+  for(var i=0;i<arr.length;i++){
+  if(arr[i]>num){
+    arrNew[arrNew.length]=arr[i]
   }
 }
+};
 
-someData.nameChecker();
-
-//BONUS
-
-someData.nameChecker=function(){
-  if(someData.hasOwnProperty("name")){
-    someData.removeName=function(){
-      delete someData["name"];
-      console.log(someData);
-      someData.addName=function(){
-        someData.name="Peter";
-        console.log(someData);
-      }
-      someData.addName();
-    }
-    someData.removeName();
-  }
+var receive=function(arr,num, calcFunction){
+  calcFunction(arr,num);
+  console.log(arrNew);
 }
 
-someData.nameChecker();
 
+receive([2,4,5],3,compare);
+
+//TASK 6
+
+var arrX=[2,3,4,5];
+var lowest=Infinity;
+var highest=-Infinity;
+var product;
+
+var findLowest=function(arrX){
+  for(var i=0;i<arrX.length;i++){
+    if(arrX[i]<lowest){
+      lowest=arrX[i]
+    }
+  }return lowest;
+};
+
+var findHighest=function(arrX){
+  for(var i=0;i<arrX.length;i++){
+    if(arrX[i]>highest){
+      highest=arrX[i]
+    }
+  }return(highest);
+};
+
+var mul=function(calculationFunctionOne,calculationFunctionTwo){
+  calculationFunctionOne(arrX);
+  calculationFunctionTwo(arrX);
+  product=lowest*highest;
+  console.log(product);
+};
+
+mul(findLowest,findHighest);
+
+
+//TASK 7
+
+arr=[15, 35, 46, 23, 15, 17, 23, 24, 35, 12, 72, 64, 35, 22, 64];
+
+arrNew=[];
+
+
+var eliminateBiggest=function(arrNew){
+  arrNew.sort().pop()}
+
+var unique=function(arr,calculationFunction){
+  for(var i=0;i<arr.length;i++){
+    if(!arrNew.includes(arr[i])){
+      arrNew.push(arr[i]);
+    }
+  }
+  calculationFunction(arrNew)
+}
+
+
+
+unique(arr,eliminateBiggest);
+
+console.log(arrNew);
