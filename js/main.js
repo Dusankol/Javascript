@@ -1,87 +1,165 @@
+//FIRST PART
 
-//FUNKCIJE
 /*TASK 1*/
 
-var arrR=[];
-var revOrder=function(arrN){
-    for(var i=0;i<arrN.length;i++){
-      arrR[i]=arrN[arrN.length-i-1]
-    }console.log(arrR);
+var data=[];
+var printData=function(data){
+  for(var i=0;i<3;i++){
+    for(var j=0;j<3;j++){
+    var k=3*i+j+1;  
+    console.log("At position "+data[i],",subposition "+data[j],",value is "+k)
+   } }
+
+};
+
+
+
+
+printData([0,1,2]);
+
+
+
+//TASK 2
+
+Object.prototype.zz=function(){
+  for(var i=0;i<this.length;i++){
+ console.log(this[i].name,this[i].age)
+}}
+
+var data = [{name:"Jim",age:45},{name:"Peter",age:29},{name:"Emanuela",age:25}];
+
+data.zz();
+
+
+//SECOND PART
+
+//TASK 1
+
+var someData = {
+  name: "Peter",
+  lastName: "Dinklage",
+  status: "married"
+};
+
+var newData={};
+
+function changeKey(someData){
+  newData["Peter"]=someData["name"];
+  newData["Dinklage"]=someData["lastName"];
+  newData["married"]=someData["status"];
+};
+
+changeKey(someData);
+console.log(newData);
+
+//TASK 2
+
+var someData = [13, 45, 56, [32, 11], 27, [55, 92]];
+
+var otherData=[];
+
+otherData=someData.toString().split(",");
+
+for(var i=0;i<otherData.length;i++){
+  otherData[i]=parseInt(otherData[i])
 }
+console.log(otherData);
 
-revOrder([2,4,7,11,6]);
+//TASK 3
 
-/*TASK 2*/
-
-var a;
-
-var declareType=function(a){
-    if(typeof a==="number"){console.log(a+ " is a number")}
-    else if (typeof a==="string"){console.log(a+ " is a string")}
-    else if (typeof a==="boolean"){console.log(a+ " is a boolean")}
-    else if (typeof a==="undefined"){console.log(a+ " is undefined")}
-    else if (typeof a==="object"){console.log(a+ " is a object")}};
-
-declareType(5);
-
-/*TASK 3*/
-
-var names=["Jim","John","Peter","Amanda","Nikki"];
-var longestString=0;
-
- function stringLength(names){
-    for(var i=0;i<names.length;i++)
-    {
-        if(names[i].length>longestString)
-        {longestString=names[i].length}}
-      return (longestString)};
+var someData = [13, 45, 56, [32, 11], 27, [55, 92]];
+var xyzData=[];
 
 
-var strLng=stringLength(names);
-
-console.log(strLng);
-
-
-
-/*TASK 4*/
-
-var num=[];
-var secondGreatest=-Infinity;
-var secondLowest=Infinity;
-var greatest=-Infinity;
-var lowest=Infinity;
-
-var max=function(num){
-  for(var i=0;i<num.length;i++)
-  {
-    if(num[i]>greatest)
-    {
-      secondGreatest=greatest
-      greatest=num[i]
-
-    }
+var joinArr=function(someData){
+  xyzData = someData.toString().split(",");
+  for(var i=0;i<xyzData.length;i++){
+    xyzData[i]=parseInt(xyzData[i]);
   }
-return secondGreatest;
+}  
+
+
+function subArr(array,calculationFunction){
+   someData=someData.splice(3,1).concat(someData.splice(4,1));
+   calculationFunction(someData);
+   return xyzData;
+};
+
+var boom=subArr(someData,joinArr);
+console.log(boom);
+
+
+//TASK 4
+
+
+var someData = {
+  name: "Peter",
+  lastName: "Dinklage",
+  status: "married"
+};
+
+function nameChecker(){
+  if(someData.hasOwnProperty("name")){
+    return function (){
+  
+  delete someData["name"]}
+  
 }
 
-var min=function(num){
-  for(var i=0;i<num.length;i++)
-  {
-    if(num[i]<lowest)
-    {
-      secondLowest=lowest
-      lowest=num[i]
+  else 
+  
+      return function(d){
+        someData.name=d;
+      }
     }
+  ;
+
+
+nameChecker(someData)();
+console.log(someData);
+
+
+//TASK 5
+
+var someData = {
+  name: "Peter",
+  lastName: "Dinklage",
+  status: "married"
+};
+
+someData.nameChecker=function(){
+  if(someData.hasOwnProperty("name")){
+    someData.removeName=function(){
+      delete someData["name"];
+      console.log(someData);
+      someData.addName=function(){
+        someData.name="Mike";
+        console.log(someData);
+      }
+      someData.addName();
+    }
+    someData.removeName();
   }
-  return secondLowest;
 }
 
-var sort=function(num){
-  var secondGreatest=max(num);
-  var secondLowest=min(num);
-  console.log(secondLowest,secondGreatest)
+someData.nameChecker();
+
+//BONUS
+
+someData.nameChecker=function(){
+  if(someData.hasOwnProperty("name")){
+    someData.removeName=function(){
+      delete someData["name"];
+      console.log(someData);
+      someData.addName=function(){
+        someData.name="Peter";
+        console.log(someData);
+      }
+      someData.addName();
+    }
+    someData.removeName();
+  }
 }
 
+someData.nameChecker();
 
-
-sort([12,4,21,24,30,15]);
