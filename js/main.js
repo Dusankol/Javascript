@@ -1,92 +1,87 @@
+
+//FUNKCIJE
 /*TASK 1*/
 
+var arrR=[];
+var revOrder=function(arrN){
+    for(var i=0;i<arrN.length;i++){
+      arrR[i]=arrN[arrN.length-i-1]
+    }console.log(arrR);
+}
 
-var text="Lorem ipsum dolor sit amet";
-
-console.log(text.toLowerCase());
+revOrder([2,4,7,11,6]);
 
 /*TASK 2*/
 
+var a;
 
-if(text.includes("sit")){console.log("word sit exists")}
-  else{console.log("word sit doesnt exist")};
+var declareType=function(a){
+    if(typeof a==="number"){console.log(a+ " is a number")}
+    else if (typeof a==="string"){console.log(a+ " is a string")}
+    else if (typeof a==="boolean"){console.log(a+ " is a boolean")}
+    else if (typeof a==="undefined"){console.log(a+ " is undefined")}
+    else if (typeof a==="object"){console.log(a+ " is a object")}};
+
+declareType(5);
 
 /*TASK 3*/
 
-console.log(text.length-1)
+var names=["Jim","John","Peter","Amanda","Nikki"];
+var longestString=0;
+
+ function stringLength(names){
+    for(var i=0;i<names.length;i++)
+    {
+        if(names[i].length>longestString)
+        {longestString=names[i].length}}
+      return (longestString)};
+
+
+var strLng=stringLength(names);
+
+console.log(strLng);
+
+
 
 /*TASK 4*/
 
-console.log(text.split(" ",3))
+var num=[];
+var secondGreatest=-Infinity;
+var secondLowest=Infinity;
+var greatest=-Infinity;
+var lowest=Infinity;
 
-/*TASK 5*/
-
-var txt="Piter is an actor.";
-
-console.log(txt.replace("e","o"))
-
-/*TASK 6*/
-
-var someData = [34, 23, 14, 56, 23, 44, 65];
-
-someData.splice(3,1);
-
-console.log(someData);
-
-/*TASK 7*/
-
-var someData = [34, 23, 14, 56, 23, 44, 65];
-
-
-
-var otherData=(someData.splice(1,3).concat(someData.splice(1,3).reverse()))
-
-console.log(otherData);
-
-
-/*TASK 8*/
-
-var someData = [334, 233, 212, 199, 154, 122];
-
-var otherData=[];
-
-someData.forEach(function(element){
-  otherData[otherData.length]=someData[otherData.length]-someData[otherData.length-1]
-});
-
-
-console.log(otherData);
-
-/*TASK 9*/
-
-var students = [
+var max=function(num){
+  for(var i=0;i<num.length;i++)
   {
-     name: "Jim",
-     avgGrade: 8.5556
-  },
-  {
-     name: "Mike",
-     avgGrade: 8.5492
-  },
-  {
-     name: "Anna",
-     avgGrade: 8.9322
-  },
-  {
-     name: "Jack",
-     avgGrade: 8.6111
+    if(num[i]>greatest)
+    {
+      secondGreatest=greatest
+      greatest=num[i]
+
+    }
   }
-]
+return secondGreatest;
+}
 
-
-var goodStudents=students.filter(function(students){
-    return students.avgGrade>8.5
+var min=function(num){
+  for(var i=0;i<num.length;i++)
+  {
+    if(num[i]<lowest)
+    {
+      secondLowest=lowest
+      lowest=num[i]
+    }
   }
-)
+  return secondLowest;
+}
 
-goodStudents.forEach(function(goodStudents){
-  goodStudents.avgGrade=goodStudents.avgGrade.toFixed(2)
-});
+var sort=function(num){
+  var secondGreatest=max(num);
+  var secondLowest=min(num);
+  console.log(secondLowest,secondGreatest)
+}
 
 
-console.log(goodStudents);
+
+sort([12,4,21,24,30,15]);
