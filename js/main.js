@@ -1,80 +1,99 @@
-//Callback functions
 
-//Task 5
-var arr=[];
-var num;
-var arrNew=[];
 
-var compare=function(arr,num){
-  for(var i=0;i<arr.length;i++){
-  if(arr[i]>num){
-    arrNew[arrNew.length]=arr[i]
-  }
-}
+//TASK 1
+
+function checkBrowserStatus(){
+
+if (navigator.onLine===true) {
+  alert("Browser is online")
+} else {
+  alert("Browser is offline")
+}};
+
+checkBrowserStatus();
+
+//TASK 2 
+//Zakomentarisao sam, cisto da se stranica ne bi osvezavala sve vreme
+
+/*function refresh(){
+  location.reload()
 };
 
-var receive=function(arr,num, calcFunction){
-  calcFunction(arr,num);
-  console.log(arrNew);
+refresh();*/
+
+
+//TASK 4
+
+var num=0;
+var int;
+
+function count(){
+  console.log(num)
+  num++
+  if(num>15){
+    clearInterval(int)
+  }
 }
 
+int=setInterval(count,1000)
 
-receive([2,4,5],3,compare);
+
+
+//TASK 5
+
+function randomise(){
+  console.log((Math.round(Math.random()*10)))
+}
+randomise();
+
 
 //TASK 6
 
-var arrX=[2,3,4,5];
-var lowest=Infinity;
-var highest=-Infinity;
-var product;
+// Kod cuvanja u lokalnom skladistu sam objekat prebacio u string da bi mogao da se sacuva, a na kraju sam oznacio korisnika koji je izlogovan kao neaktivan
 
-var findLowest=function(arrX){
-  for(var i=0;i<arrX.length;i++){
-    if(arrX[i]<lowest){
-      lowest=arrX[i]
-    }
-  }return lowest;
-};
+var result;
+var data=[{name:"Homer",age:36,status:"inactive"},
+          {name:"Marge",age:35,status:"inactive"},
+          {name:"Bart",age:10,status:"inactive"},
+          {name:"Lisa",age:8,status:"inactive"},
+          {name:"Maggie",age:1,status:"inactive"}];
 
-var findHighest=function(arrX){
-  for(var i=0;i<arrX.length;i++){
-    if(arrX[i]>highest){
-      highest=arrX[i]
-    }
-  }return(highest);
-};
-
-var mul=function(calculationFunctionOne,calculationFunctionTwo){
-  calculationFunctionOne(arrX);
-  calculationFunctionTwo(arrX);
-  product=lowest*highest;
-  console.log(product);
-};
-
-mul(findLowest,findHighest);
+var username=prompt("Enter your name");
 
 
-//TASK 7
-
-arr=[15, 35, 46, 23, 15, 17, 23, 24, 35, 12, 72, 64, 35, 22, 64];
-
-arrNew=[];
 
 
-var eliminateBiggest=function(arrNew){
-  arrNew.sort().pop()}
-
-var unique=function(arr,calculationFunction){
-  for(var i=0;i<arr.length;i++){
-    if(!arrNew.includes(arr[i])){
-      arrNew.push(arr[i]);
-    }
+var checking=data.some(function(element){
+  if(element.name.toLowerCase().includes(username.toLowerCase())){
+    return true;
   }
-  calculationFunction(arrNew)
+  else{return false;}
+})
+
+function print(){
+  if(checking===false){
+    console.log("User with name " + username + " doesn't exist.")
+  }
+  else if(checking===true){
+    for(var i=0;i<data.length;i++){
+      if(data[i].name.toLowerCase().includes(username.toLowerCase())){
+        data[i].status="active";
+        localStorage.setItem("LoggedInUser",JSON.stringify(data[i]));
+
+      }
+    }
+  }setTimeout(remove,60000);
 }
 
+print()
 
 
-unique(arr,eliminateBiggest);
-
-console.log(arrNew);
+function remove(){
+  localStorage.removeItem("LoggedInUser")
+  for(var i=0;i<data.length;i++){
+    if(data[i].name.toLowerCase().includes(username.toLowerCase())){
+      data[i].status="inactive"
+    }
+  }
+  console.log("User " +username+" is logged out.")
+};
