@@ -1,85 +1,115 @@
-body {
-  margin:0px;
-  padding:0px;
-  font-family:sans-serif;
-  background-color:#d0ae6e;
+
+*{
+  box-sizing: border-box;
 }
-
-div.main_wrapper{
-  width:100%;
-  max-width:1200px;
-  margin:0px auto;
+body{
+  margin:0;
+  padding:0;
+  background-color: #eee;
+  
 }
-
-
-/*HEADER*/
-
 
 header{
-  background-color:#eb1b27;
-  box-shadow:0px 0px 5px 2px #d0ae6e;
-  padding:15px;
+  background-color: #fff;
+  padding: 10px 0;
 }
 
-header a.logo{
-  display:block;
+header > .main_wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-header a.logo img{
-  position:relative;
-   left:80px;
- }
-
-/*MAIN SECTION*/
-
-h1{
-  text-transform:uppercase;
-  color: #eb1c27;
-  margin-left:70px;
+.main_wrapper{
+  width: 80%;
+  max-width: 1200px;
+  margin: 30px auto 0px auto;
 }
 
-section.firstSquad{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:flex-start;
-  margin-left:70px;
+.search{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-section.subs{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:flex-start;
-  padding-top:60px;
-  margin-top:30px;
-  margin-left:70px;
+.search input{
+  width: 350px;
+  height: 30px;
+  padding:5px;
 }
 
-div.player{
-width:18%;
-margin-right:20px;
+.search button{
+  text-align: center;
+  background-color: red;
+  height: 30px;
+  text-transform: uppercase;;
+  outline: none;
+  border:none;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
 }
 
 
-div.player div{
-padding:10px 0;
-font-weight:bold;
-}
-
-div.player img{
-width:80%;
-margin-bottom:10px;
+.logo img{
+  width: 20%;
 }
 
 
-div.red{
-  height: 3px;
-  width: 88%;
-  background-color: #eb1b27;
+h3{
+  margin-top: 0;
+}
+
+.video_list{
+  padding:60px 0;
+}
+
+
+.video_list > div{
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.video_list > div > img{
+  margin-right: 20px;
+  cursor: pointer;
+
+}
+
+.video_list h3{
+  cursor: pointer;
+}
+
+.video_list .description{
+  color:#999;
+  height: 220px;
+  overflow: hidden;
+}
+
+
+.related {
   position: absolute;
-  top: 765px;
-  margin-left:70px;
-  right:95px;
-
+  left: 800px;
+  top: 100px;
+  display: flex;
+    flex-wrap: wrap;
 }
 
 
+
+
+.video_list.related>div>img {
+  width: 250px;
+    height: 140px;
+}
+
+.video_list.related>div>section{
+  display: flex;
+}
+
+.video_list.related>div>section>h3{
+  width: 200px;
+}
+.video_list.related>div>section>div.description{
+  display: none;
+}

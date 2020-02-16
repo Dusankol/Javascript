@@ -1,196 +1,85 @@
-var crvenaZvezdaPlayers=[
-{
-  img:"punter.jpg",
-  name:"Kevin",
-  lastName:"Punter",
-  age:26,
-  number:"00",
-  position: "Guard"
-},
-{
-  img:"kuzmic.jpg",
-  name:"Ognjen",
-  lastName:"Kuzmic",
-  age:29,
-  number:0,
-  position: "Center"
-},{
-  img:"dbrown.jpg",
-  name:"Derrick",
-  lastName:"Brown",
-  age:32,
-  number:1,
-  position: "Forward"
-},
-{
-  img:"covic.jpg",
-  name:"Filip",
-  lastName:"Covic",
-  age:30,
-  number:3,
-  position: "Guard"
-},{
-  img:"lbrown.jpg",
-  name:"Lorenzo",
-  lastName:"Brown",
-  age:29,
-  number:4,
-  position: "Guard"
-},{
-  img:"perperoglou.jpg",
-  name:"Stratos",
-  lastName:"Perperoglou",
-  age:35,
-  number:5,
-  position: "Forward"
-},{
-  img:"davidovac.jpg",
-  name:"Dejan",
-  lastName:"Davidovac",
-  age:24,
-  number:7,
-  position: "Forward"
-},{
-  img:"lazic.jpg",
-  name:"Branko",
-  lastName:"Lazic",
-  age:30,
-  number:10,
-  position: "Guard"
-},{
-  img:"baron.jpg",
-  name:"Billy",
-  lastName:"Baron",
-  age:29,
-  number:12,
-  position: "Guard"
-},{
-  img:"dobric.jpg",
-  name:"Ognjen",
-  lastName:"Dobric",
-  age:25,
-  number:13,
-  position: "Guard"
-},{
-  img:"gist.jpg",
-  name:"James",
-  lastName:"Gist",
-  age:33,
-  number:15,
-  position: "Forward"
-},{
-  img:"jagodic-kuridza.jpg",
-  name:"Marko",
-  lastName:"Jagodic-Kuridza",
-  age:32,
-  number:21,
-  position: "Forward"
-},{
-  img:"jenkins.jpg",
-  name:"Charles",
-  lastName:"Jenkins",
-  age:30,
-  number:22,
-  position: "Guard"
-},{
-  img:"simanic.jpg",
-  name:"Borisa",
-  lastName:"Simanic",
-  age:21,
-  number:28,
-  position: "Forward"
-},{
-  img:"jovanovic.jpg",
-  name:"Nikola",
-  lastName:"Jovanovic",
-  age:25,
-  number:32,
-  position: "Center"
-},{
-  img:"ojo.jpg",
-  name:"Michael",
-  lastName:"Ojo",
-  age:26,
-  number:50,
-  position: "Center"
-},{
-  img:"faye.jpg",
-  name:"Mouhammad",
-  lastName:"Faye",
-  age:34,
-  number:11,
-  position: "Forward"
-}
-];
+var searchButton=document.querySelector(".search button");
+ var key="AIzaSyCjwX9RTFMP1fCjmjIp86dJ4vsnd9bonT4";
+ var videoPreview=document.querySelector(".video_preview");
+ var videoList=document.querySelector(".video_list");
+ 
 
-function randomise(arr){
-  return Math.floor(Math.random()*arr.length);
+function onSearch(){
+  var searchField=document.querySelector(".search input");
+
+  searchField.value.trim() && getVideos(searchField.value);
+  searchField.value="";
 }
 
-function addPlayers(){
-  while(crvenaZvezdaPlayers.length){
 
-    var firstSquad=document.querySelector(".firstSquad");
-    var subs=document.querySelector(".subs");
-    var randomNumber=randomise(crvenaZvezdaPlayers)
-    var container= crvenaZvezdaPlayers.length>12? firstSquad:subs;
+function getVideos(searchValue){
+  var req= new XMLHttpRequest();
+  req.open("GET","https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q="+searchValue+"&key="+key);
 
-    container.appendChild(createPlayer(crvenaZvezdaPlayers[randomNumber]));
-    crvenaZvezdaPlayers.splice(randomNumber,1);
+  req.onload=function(){ 
+    
+    listVideos(JSON.parse(req.responseText).items)
+
   }
+  req.send()
+
 }
 
 
-function createPlayer(playerData){
-  var player=document.createElement("div");
-  player.classList.add("player")
-  var img='<img src="../img/' +playerData.img+ '"/>';
-  var name='<div>'+ playerData.name+" "+playerData.lastName+'</div>';
-  var age='<div>Age: '+ playerData.age+'</div>';
-  var num='<div>Number: '+ playerData.number+'</div>';
-  var position='<div>Position: '+ playerData.position+'</div>';
+function listVideos(videos){
+ 
+  
+  videoList.innerHTML="";
 
-  player.innerHTML=img+name+age+num+position;
-  return player;
+  videos.forEach(function(video){
+    if(!("channelId" in video.id)){
+        addVideo(video)}
+  })
+
+  
 }
 
 
-function makeSubs(){
-  var firstSquad=document.querySelectorAll(".firstSquad .player");
-  var subs=document.querySelectorAll(".subs .player");
+function addVideo(videoData){
 
-  var firstSquadNumber=randomise(firstSquad);
-  var subsNumber=randomise(subs);
+   var videoElement=document.createElement("div");
+ 
+   var img="<img src='"+ videoData.snippet.thumbnails.medium.url +"'/>"
+   var title="<h3>"+videoData.snippet.title+"</h3>"
+   var desc="<div class='description'>"+videoData.snippet.description+"</div>"
 
-  var firstSquadPlayer=firstSquad[firstSquadNumber];
-  var subsPlayer=subs[subsNumber];
+   
 
-  var subsPrevious=subsPlayer.previousSibling;
-  var subsNext=subsPlayer.nextSibling;
+    videoElement.innerHTML=img+"<section>"+title+desc+"</section>";
 
+  videoList.appendChild(videoElement)
 
-  firstSquadPlayer.after(subsPlayer);
-
-  subsPrevious?subsPrevious.after(firstSquadPlayer):subNext.before(firstSquadPlayer);
-
-  var one=firstSquadPlayer.querySelector("div");
-  var two=subsPlayer.querySelector("div")
-console.log(one.innerHTML+" has been substituted with "+two.innerHTML)
-
+  videoElement.querySelectorAll("h3,img").forEach(function(element){
+    element.addEventListener("click",function(){
+      openVideo(videoData.id.videoId)})})
  
 }
 
+function openVideo(id){
+  videoList.classList.add("related");
+  videoPreview.innerHTML='<iframe width="560" height="315" src="https://www.youtube.com/embed/'+id+'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+  var reqR=new XMLHttpRequest();
+  reqR.open("GET","https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&relatedToVideoId="+id+"&type=video&key="+key);
 
-addPlayers();
+  reqR.onload=function(){
+  listVideos(JSON.parse(reqR.responseText).items)
+  desc="";
+  }
 
-setInterval(makeSubs,4000);
-
-
-var border= document.createElement("div");
-
-border.classList.add("red")
-
-document.querySelector("section.firstSquad").appendChild(border);
+  reqR.send()
+}
 
 
 
+//INIT
+
+searchButton.addEventListener("click",onSearch)
+
+document.querySelector("input").addEventListener("keypress",function(e){
+  if(e.keyCode===13){searchButton.click()}
+})
