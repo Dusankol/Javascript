@@ -185,70 +185,12 @@ addPlayers();
 
 setInterval(makeSubs,4000);
 
-//CSS
-
-//Ne znam da li postoji bolji nacin da se ovo odradi, ali ovo je jedini nacin koji sam nasao, a da radi, obzirom da nacin sa casa ne funkcionise
-
-Object.assign(document.querySelector("body").style,{
-  margin:"0px",
-  padding:"0px",fontFamily:"sans-serif",
-  backgroundColor:"#d0ae6e"});
-Object.assign(document.querySelector("div.main_wrapper").style,{
-  width: "100%",
-  maxWidth: "1200px",
-  margin: "0px auto"});
-//HEADER
-Object.assign(document.querySelector("header").style,{
-  backgroundColor: "#eb1b27",
-  boxShadow: "0px 0px 5px 2px #d0ae6e",
-  padding: "15px"});
-Object.assign(document.querySelector("header a.logo").style,{
-  display:"block"});
-Object.assign(document.querySelector("header a.logo img").style,{
-  position:"relative",
-   left:"80px"});
-//MAIN SECTION
-Object.assign(document.querySelector("h1").style,{
-  textTransform:"uppercase",
-  color: "#eb1c27",
-  marginLeft:"70px"});
-Object.assign(document.querySelector("section.firstSquad").style,{
-  display:"flex",
-  flexWrap:"wrap",
-  justifyContent:"flexStart",
-  marginLeft:"70px"});
-Object.assign(document.querySelector("section.subs").style,{
-  display:"flex",
-  flexWrap:"wrap",
-  justifyContent:"flex-start",
-  paddingTop:"60px",
-  marginTop:"30px",
-  marginLeft:"70px"});
-
-var pl=document.querySelectorAll("div.player");
-for(var i=0;i<pl.length;i++){
-Object.assign(pl[i].style,{width:"18%",marginRight:"20px"})};
-
-
-var plDiv=document.querySelectorAll("div.player div");
-for(var i=0;i<plDiv.length;i++){
-Object.assign(plDiv[i].style,{padding:"10px 0",fontWeight:"bold"})};
-
-var plImg=document.querySelectorAll("div.player img");
-for(var i=0;i<plImg.length;i++){
-Object.assign(plImg[i].style,{width:"80%",marginBottom:"10px"})};
 
 var border= document.createElement("div");
+
+border.classList.add("red")
 
 document.querySelector("section.firstSquad").appendChild(border);
 
 
-Object.assign(border.style,{
-  height: "3px",
-  width: "88%",
-  backgroundColor: "#eb1b27",
-  position: "absolute",
-  top: "765px",
-  marginLeft: "70px",
-  right: "95px"});
 
