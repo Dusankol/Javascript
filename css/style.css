@@ -1,6 +1,7 @@
 img{
   width: auto;
-  height: 400px;
+  max-height: 400px;
+  min-height: 400px;
   display: block;
   margin: 0 auto;
   border: black solid 2px;

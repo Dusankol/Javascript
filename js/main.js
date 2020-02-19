@@ -18,6 +18,8 @@ req.onload=function(){
 req.send()}
 getData()
 
+select.addEventListener("change",getData)
+
 setInterval(getData,5000)
 
 function display(url){
