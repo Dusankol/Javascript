@@ -1,28 +1,72 @@
+var pics=[{img:"../img/baron.jpg"},
+          {img:"../img/dobric.jpg"},
+          {img:"../img/jenkins.jpg"},
+          {img:"../img/simanic.jpg"}];
 
-var select=document.querySelector("#dogSelect");
-var img=document.querySelector("img");
-var option=document.getElementsByTagName("option");
-var breed=option[0].value;
+var slider = document.querySelector(".slide");
+var thumbnails = document.querySelector(".thumbnails");
 
-function check(event){
-  breed=event.target.value
+
+for (var i = 0; i < pics.length; i++){
+  var image=document.createElement("img");
+  var thumbnail=document.createElement("img");
+  image.setAttribute("src",pics[i].img);
+  image.classList.add("playerImg");
+  slider.appendChild(image)
+  thumbnail.setAttribute("src",pics[i].img);
+  thumbnail.classList.add("playerThm")
+  thumbnails.appendChild(thumbnail)
 }
 
-function getData(){
-req=new XMLHttpRequest();
-req.open("GET","https://dog.ceo/api/breed/"+breed+"/images/random");
-req.onload=function(){
-  var url=JSON.parse(req.responseText).message;
-  display(url)
+
+var sld=document.querySelectorAll(".playerImg");
+var thm=document.querySelectorAll(".playerThm");
+
+
+var c=-1;
+
+var margin=[];
+
+for(var i=0;i<pics.length;i++){
+  margin[i]=-i*390;
 }
-req.send()}
-getData()
 
-select.addEventListener("change",getData)
+/*function switching(){
+  c++;
+  if(c>3) {c=0};
 
-setInterval(getData,5000)
-
-function display(url){
-  img.setAttribute("src",url)
-
+  for(var i=0;i<pics.length;i++){
+    if (i!==c){
+      sld[i].style.display="none";
+      thm[i].classList.remove("active")
+    }else{
+      sld[i].style.display="block";
+      thm[i].classList.add("active")
+    
+    }
+  }
 }
+
+switching();*/
+
+/*setInterval(switching, 5000);*/ 
+
+
+
+function sliding(){
+  c++;
+  if(c>3){c=0;}
+
+  sld[0].style.marginLeft=margin[c]+"px";
+  for (var i=0;i<pics.length;i++){
+    if(i!==c){
+      thm[i].classList.remove("active");
+    } else {
+      thm[i].classList.add("active")
+    }
+  }
+}
+
+sliding();
+setInterval(sliding,5000)
+

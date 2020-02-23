@@ -1,17 +1,42 @@
-img{
-  width: auto;
-  max-height: 400px;
-  min-height: 400px;
-  display: block;
-  margin: 0 auto;
-  border: black solid 2px;
+body{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
-h1{
-  text-align: center;
+.thumbnails {
+	display: flex;
+    position: relative;
+    top: 70px;
+    width: 400px;
+    margin: 0 auto;
 }
 
-select{
-  display: block;
-  margin: 20px auto;
+
+.thumbnails img{
+	width: 20%;
+	display: block;
+	margin: 0 auto;
+}
+
+
+
+.slide img{
+	display: block;
+    margin: 0 auto;
+    width: 380px;
+    height: 570px;
+    border: red solid 5px;
+    position: relative;
+}
+
+.active{
+	border: solid red 5px;
+}
+
+.slide{
+	display: flex;
+	overflow: hidden;
+	width: 390px;
+	margin: 0 auto;
 }
