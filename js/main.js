@@ -1,72 +1,95 @@
-var pics=[{img:"../img/baron.jpg"},
-          {img:"../img/dobric.jpg"},
-          {img:"../img/jenkins.jpg"},
-          {img:"../img/simanic.jpg"}];
 
-var slider = document.querySelector(".slide");
-var thumbnails = document.querySelector(".thumbnails");
+var movies = [
+  {
+    image:"../img/avengers-one.jpg",
+    name:"Avengers"
+  },
+   {
+    image:"../img/avengers-two.jpg",
+    name:"Avengers: Age Of Ultron"
+  },
+   {
+    image:"../img/avengers-three.jpg",
+    name:"Avengers: Infinity Wars"
+  },
+   {
+    image:"../img/avengers-four.jpg",
+    name:"Avengers: Endgame"
+  },
+   {
+    image:"../img/matrix-one.jpg",
+    name:"The Matrix"
+  },
+  {
+    image:"../img/matrix-two.jpg",
+    name:"The Matrix: Reloaded"
+  },
+  {
+    image:"../img/matrix-three.jpg",
+    name:"The Matrix: Revolutions"
+  },
+  {
+    image:"../img/the-lord-of-the-rings-one.jpg",
+    name:"The Lord Of The Rings: The Fellowship Of The Ring"
+  },
+    {
+    image:"../img/the-lord-of-the-rings-two.jpg",
+    name:"The Lord Of The Rings: Two Towers"
+  },
+    {
+    image:"../img/the-lord-of-the-rings-three.jpg",
+    name:"The Lord Of The Rings: The Return Of The King"
+  },
+  {
+    image:"../img/forrest-gump.jpg",
+    name:"Forrest Gump"
+  },
+  {
+    image:"../img/the-shawshank-redemption.jpg",
+    name:"The Shawshank Redemption"
+  }
+];
 
 
-for (var i = 0; i < pics.length; i++){
-  var image=document.createElement("img");
-  var thumbnail=document.createElement("img");
-  image.setAttribute("src",pics[i].img);
-  image.classList.add("playerImg");
-  slider.appendChild(image)
-  thumbnail.setAttribute("src",pics[i].img);
-  thumbnail.classList.add("playerThm")
-  thumbnails.appendChild(thumbnail)
+
+var input=document.querySelector("#search");
+
+var movieList=document.querySelector("#movie-list");
+
+function displayMovies(){
+for (var i=0;i<movies.length;i++){
+  var link=document.createElement("a");
+
+
+  var img='<img src="'+movies[i].image+'"/>';
+
+  var title='<h2>'+movies[i].name+'</h2>';
+
+  link.innerHTML=title+img;
+
+  link.classList.add("movie")
+  movieList.appendChild(link)
+}}
+
+displayMovies()
+
+var movieLinks=document.querySelectorAll(".movie");
+
+function searchMovies() {
+  
+
+  for(var i=0;i<movies.length;i++){
+    var searchTerm=input.value.toUpperCase();
+
+  if(movieLinks[i].text.toUpperCase().indexOf(searchTerm)>-1)
+{
+  movieLinks[i].style.display="block";
+}else{
+  movieLinks[i].style.display="none";
 }
 
 
-var sld=document.querySelectorAll(".playerImg");
-var thm=document.querySelectorAll(".playerThm");
-
-
-var c=-1;
-
-var margin=[];
-
-for(var i=0;i<pics.length;i++){
-  margin[i]=-i*390;
-}
-
-/*function switching(){
-  c++;
-  if(c>3) {c=0};
-
-  for(var i=0;i<pics.length;i++){
-    if (i!==c){
-      sld[i].style.display="none";
-      thm[i].classList.remove("active")
-    }else{
-      sld[i].style.display="block";
-      thm[i].classList.add("active")
-    
-    }
   }
 }
-
-switching();*/
-
-/*setInterval(switching, 5000);*/ 
-
-
-
-function sliding(){
-  c++;
-  if(c>3){c=0;}
-
-  sld[0].style.marginLeft=margin[c]+"px";
-  for (var i=0;i<pics.length;i++){
-    if(i!==c){
-      thm[i].classList.remove("active");
-    } else {
-      thm[i].classList.add("active")
-    }
-  }
-}
-
-sliding();
-setInterval(sliding,5000)
+input.addEventListener("keyup",searchMovies)
 
