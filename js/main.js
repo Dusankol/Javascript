@@ -59,21 +59,29 @@ var movieList=document.querySelector("#movie-list");
 function displayMovies(){
 for (var i=0;i<movies.length;i++){
   var link=document.createElement("a");
+  link.classList.add("movie");
+  movieList.appendChild(link);
 
+  var title=document.createElement("h2");
+  title.innerHTML=movies[i].name;
+  title.classList.add("title");
+  link.appendChild(title);
 
-  var img='<img src="'+movies[i].image+'"/>';
+  var img=document.createElement("img");
+  img.setAttribute("src", movies[i].image);
+  img.classList.add("gallery");
+  link.appendChild(img);
 
-  var title='<h2>'+movies[i].name+'</h2>';
-
-  link.innerHTML=title+img;
-
-  link.classList.add("movie")
-  movieList.appendChild(link)
+  var remove=document.createElement("h3");
+  remove.innerHTML="X";
+  remove.classList.add("x");
+  link.appendChild(remove);
 }}
 
 displayMovies()
 
 var movieLinks=document.querySelectorAll(".movie");
+var remove=document.querySelectorAll(".x");
 
 function searchMovies() {
   
@@ -92,4 +100,13 @@ function searchMovies() {
   }
 }
 input.addEventListener("keyup",searchMovies)
+      
 
+ /* Ovaj deo oko X koji sklanja odredjeni film nisam nikako mogao ovako kroz petlju da 
+  postavim, stalno mi je pisalo Cannot read property 'style' of undefined
+  at HTMLHeadingElement.Mada je kroz petlju postavljen event listener na svaki od elemenata.
+  Kada se odradi rucno za svaki, funkcionise.
+*/
+for(var i=0;i<remove.length;i++){
+  remove[i].addEventListener("click",function(){movieLinks[i].style.display="none"})
+}
