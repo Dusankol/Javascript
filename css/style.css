@@ -1,64 +1,85 @@
+body {
+  margin:0px;
+  padding:0px;
+  font-family:sans-serif;
+  background-color:#d0ae6e;
+}
 
-body{
-	margin:0;
-	padding:0;
-	box-sizing: border-box;
+div.main_wrapper{
+  width:100%;
+  max-width:1200px;
+  margin:0px auto;
 }
 
 
+/*HEADER*/
 
-#headerContainer{
-	display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 100px;
-}
 
 header{
-	background-color: black;
+  background-color:#eb1b27;
+  box-shadow:0px 0px 5px 2px #d0ae6e;
+  padding:15px;
 }
 
-header h1{
-	color: white;
+header a.logo{
+  display:block;
 }
 
-header input{
-	width: 100%;
-    max-width: 250px;
-    height: 20px;
-    border-radius: 5px;
-    padding:5px;
+header a.logo img{
+  position:relative;
+   left:80px;
+ }
+
+/*MAIN SECTION*/
+
+h1{
+  text-transform:uppercase;
+  color: #eb1c27;
+  margin-left:70px;
+}
+
+section.firstSquad{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-start;
+  margin-left:70px;
+}
+
+section.subs{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-start;
+  padding-top:60px;
+  margin-top:30px;
+  margin-left:70px;
+}
+
+div.player{
+width:18%;
+margin-right:20px;
 }
 
 
-#movie-list{
-	display: flex;
-    flex-wrap: wrap;
+div.player div{
+padding:10px 0;
+font-weight:bold;
+}
+
+div.player img{
+width:80%;
+margin-bottom:10px;
 }
 
 
-.movie{
-	width: 30%;
-	margin:0 auto;
-	text-align: center;
-	text-decoration: none;
-	color: black;
-	position: relative;
+div.red{
+  height: 3px;
+  width: 88%;
+  background-color: #eb1b27;
+  position: absolute;
+  top: 765px;
+  margin-left:70px;
+  right:95px;
+
 }
 
-.movie img{
-	width: 360px;
-	height: 500px;
-	display: block;
-	margin:0 auto;
-}
 
-.movie h3{
-	border: solid black 2px;
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    cursor: pointer;
-}
