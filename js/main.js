@@ -1,195 +1,145 @@
-const crvenaZvezdaPlayers=[
-{
-  img:"punter.jpg",
-  name:"Kevin",
-  lastName:"Punter",
-  age:26,
-  number:"00",
-  position: "Guard"
-},
-{
-  img:"kuzmic.jpg",
-  name:"Ognjen",
-  lastName:"Kuzmic",
-  age:29,
-  number:0,
-  position: "Center"
-},{
-  img:"dbrown.jpg",
-  name:"Derrick",
-  lastName:"Brown",
-  age:32,
-  number:1,
-  position: "Forward"
-},
-{
-  img:"covic.jpg",
-  name:"Filip",
-  lastName:"Covic",
-  age:30,
-  number:3,
-  position: "Guard"
-},{
-  img:"lbrown.jpg",
-  name:"Lorenzo",
-  lastName:"Brown",
-  age:29,
-  number:4,
-  position: "Guard"
-},{
-  img:"perperoglou.jpg",
-  name:"Stratos",
-  lastName:"Perperoglou",
-  age:35,
-  number:5,
-  position: "Forward"
-},{
-  img:"davidovac.jpg",
-  name:"Dejan",
-  lastName:"Davidovac",
-  age:24,
-  number:7,
-  position: "Forward"
-},{
-  img:"lazic.jpg",
-  name:"Branko",
-  lastName:"Lazic",
-  age:30,
-  number:10,
-  position: "Guard"
-},{
-  img:"baron.jpg",
-  name:"Billy",
-  lastName:"Baron",
-  age:29,
-  number:12,
-  position: "Guard"
-},{
-  img:"dobric.jpg",
-  name:"Ognjen",
-  lastName:"Dobric",
-  age:25,
-  number:13,
-  position: "Guard"
-},{
-  img:"gist.jpg",
-  name:"James",
-  lastName:"Gist",
-  age:33,
-  number:15,
-  position: "Forward"
-},{
-  img:"jagodic-kuridza.jpg",
-  name:"Marko",
-  lastName:"Jagodic-Kuridza",
-  age:32,
-  number:21,
-  position: "Forward"
-},{
-  img:"jenkins.jpg",
-  name:"Charles",
-  lastName:"Jenkins",
-  age:30,
-  number:22,
-  position: "Guard"
-},{
-  img:"simanic.jpg",
-  name:"Borisa",
-  lastName:"Simanic",
-  age:21,
-  number:28,
-  position: "Forward"
-},{
-  img:"jovanovic.jpg",
-  name:"Nikola",
-  lastName:"Jovanovic",
-  age:25,
-  number:32,
-  position: "Center"
-},{
-  img:"ojo.jpg",
-  name:"Michael",
-  lastName:"Ojo",
-  age:26,
-  number:50,
-  position: "Center"
-},{
-  img:"faye.jpg",
-  name:"Mouhammad",
-  lastName:"Faye",
-  age:34,
-  number:11,
-  position: "Forward"
+var searchButton = document.querySelector(".search-button");
+var appId="2a81fffb";
+var appKey="c76432340eaabf32a594b16cac90fdcb";
+var req=new XMLHttpRequest();
+var recipesList=document.querySelector("#recipes");
+var page=1;
+var healthLabels=document.querySelector("select#health");
+var dietLabels=document.querySelector("select#diet");
+var caloriesMin=document.querySelector("#cal-min");
+var caloriesMax=document.querySelector("#cal-max");
+var count=document.querySelector("span.recipe-count-number");
+var rcn=0;
+var footer=document.querySelector("footer");
+var numOfPages;
+var loader=document.querySelector(".loader");
+
+function onSearch(pageNum){
+  rcn=parseInt(count.innerHTML);
+  var start = (pageNum - 1) * 10;
+  var end = start + 10;
+  if (end > rcn && rcn !== 0) end = rcn;
+  if (end <= start) return; 
+
+  var searchValue=document.querySelector(".keyword-input").value;
+  var healthOption;
+  if(healthLabels.value="general"){healthOption="";}else{healthOption="&health="+healthLabels.value}
+  var dietOption;
+  if(dietLabels.value="general"){dietOption="";}else{dietOption="&diet="+dietLabels.value}
+
+  var caloriesRange;
+  if(caloriesMin.value.length===0&&caloriesMax.value.length===0){caloriesRange="&calories="+0+"-"+9999999};
+  if(caloriesMin.value.length===0&&caloriesMax.value.length!==0){caloriesRange="&calories="+0+"-"+caloriesMax.value};
+  if(caloriesMin.value.length!==0&&caloriesMax.value.length===0){caloriesRange="&calories="+caloriesMin.value+"-"+9999999};
+  if(caloriesMin.value.length!==0&&caloriesMax.value.length!==0){caloriesRange="&calories="+caloriesMin.value+"-"+caloriesMax.value};
+  
+  var url="https://api.edamam.com/search?q="+searchValue+"&app_id="+appId+"&app_key="+appKey+"&from="+start+"&to="+end+healthOption+dietOption+caloriesRange;
+  req.open("GET",url)
+  loader.style.display="flex"
+  req.send()
+
+  
 }
-];
 
-const randomise=arr=> Math.floor(Math.random()*arr.length);
+req.onload=function(){
 
-const addPlayers=()=>{
-  while(crvenaZvezdaPlayers.length){
+  recipesList.innerHTML="";
+  count.innerHTML=JSON.parse(req.responseText).count;
+  numOfPages=Math.ceil(count.innerHTML/10);
+  JSON.parse(req.responseText).hits.forEach(function(recipe){
+    addRecipes(recipe)
+  })
+}
 
-    let firstSquad=document.querySelector(".firstSquad");
-    let subs=document.querySelector(".subs");
-    let randomNumber=randomise(crvenaZvezdaPlayers)
-    let container= crvenaZvezdaPlayers.length>12? firstSquad:subs;
+function addRecipes(recipeData){
+  var recipeElement=document.createElement("div");
+  recipeElement.classList.add("recipe-element")
 
-    container.appendChild(createPlayer(crvenaZvezdaPlayers[randomNumber]));
-    crvenaZvezdaPlayers.splice(randomNumber,1);
+  var img="<img src='"+recipeData.recipe.image+"'/>";
+  var title="<h3>"+recipeData.recipe.label+"</h3>";
+  var tags="<div class='label'>"+recipeData.recipe.healthLabels+"</div>";
+  var caloriesCounter="<div class='calories'>"+Math.round(recipeData.recipe.calories/recipeData.recipe.yield)+' kcal'+"</div>"
+
+  recipeElement.innerHTML=img+caloriesCounter+"<div class='labels'>"+title+tags+"</div>";
+  recipesList.appendChild(recipeElement)
+
+  createFooter()
+
+  recipeElement.querySelectorAll("img,h3").forEach(function(element){
+    element.addEventListener("click",showRecipe)
+  })
+
+  function showRecipe(url){
+      window.open(recipeData.recipe.url, '_blank');
+}
+
+}
+
+function createFooter(){
+  var numOfPages=Math.ceil(req.responseText.count/10);
+  var footer = document.querySelector("footer");
+  footer.style.visibility = "visible";
+  var nStart = page;
+  var nEnd = nStart + 4;
+
+  footer.firstElementChild.style.visibility = "visible";
+  footer.lastElementChild.style.visibility = "visible";
+
+  if (nStart === 1) {
+    footer.firstElementChild.style.visibility = "hidden";
+  };
+  if (numOfPages <= nEnd){
+    nEnd = numOfPages;
+    footer.lastElementChild.style.display="none"
   }
+
+  
+  while(footer.children.length > 2){
+    footer.removeChild(footer.children[1]);
+  }
+  var counter = 0;
+  for (var i = nStart; i <= nEnd; i++){
+    var newElement = document.createElement("span");
+    newElement.innerHTML = "&nbsp;" + i + "&nbsp;";
+    newElement.setAttribute("id", i);
+    i === page ? newElement.classList.add("current-page") : newElement.classList.remove("current-page");
+    newElement.onclick = function (){
+      page = parseInt(this.id);
+      onSearch(page);
+    }
+    counter++;
+    footer.children[counter-1].after(newElement);
+  };
+  
+  loader.style.display="none"
+
+  footer.firstElementChild.addEventListener("click", function(){
+    var previous = parseInt(footer.firstElementChild.nextElementSibling.innerText)-1;
+      page = previous;
+      onSearch(page);
+    
+  })
+  
+
+  footer.lastElementChild.addEventListener("click",function(){
+    var next=parseInt(footer.lastElementChild.previousElementSibling.getAttribute("id"))-3;
+      page=next
+      onSearch(page);
+    }
+  )
+
+
 }
 
 
-const createPlayer=(playerData)=>{
-  let player=document.createElement("div");
-  player.classList.add("player")
-  let img='<img src="../img/' +playerData.img+ '"/>';
-  let name=`<div>${playerData.name} ${playerData.lastName}</div>`;
-  let age=`<div>Age: ${playerData.age}</div>`;
-  let num=`<div>Number: ${playerData.number}</div>`;
-  let position=`<div>Position:  ${playerData.position}</div>`;
+//INIT
+
+searchButton.addEventListener("click",function(){onSearch(1)});
+document.querySelector(".keyword-input").addEventListener("keypress",function(e){
+  if(e.keyCode===13){searchButton.click()}
+})
 
 
-  player.innerHTML=img+name+age+num+position;
-  return player;
-}
-
-
-const makeSubs=()=>{
-  let firstSquad=document.querySelectorAll(".firstSquad .player");
-  let subs=document.querySelectorAll(".subs .player");
-
-  let firstSquadNumber=randomise(firstSquad);
-  let subsNumber=randomise(subs);
-
-  let firstSquadPlayer=firstSquad[firstSquadNumber];
-  let subsPlayer=subs[subsNumber];
-
-  let subsPrevious=subsPlayer.previousSibling;
-  let subsNext=subsPlayer.nextSibling;
-
-
-  firstSquadPlayer.after(subsPlayer);
-
-  subsPrevious?subsPrevious.after(firstSquadPlayer):subNext.before(firstSquadPlayer);
-
-  let one=firstSquadPlayer.querySelector("div");
-  let two=subsPlayer.querySelector("div")
-console.log(`${one.innerHTML} has been substituted with ${two.innerHTML}`)
-
- 
-}
-
-
-addPlayers();
-
-setInterval(makeSubs,4000);
-
-
-const border= document.createElement("div");
-
-border.classList.add("red")
-
-document.querySelector("section.firstSquad").appendChild(border);
 
 
 
